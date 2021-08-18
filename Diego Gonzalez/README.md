@@ -26,6 +26,62 @@ Los lenguajes que más me gustan son:
 
 > Python me parece interesante debido a su capacidad con la inteligencia artificial, así como el manejo de grandes bases de datos con el fin de analizarlos
 
+## Ejemplos en código
+### Java
+```
+/**
+     * Hace crecer la serpiente en las unidades especificadas, entiendase hacerla crecer en cuanto a longitud
+     * @param unidades - Cantidad en la que crece la serpiente
+     */
+    public final void crecer(int unidades) {
+        for(int i=0;i<unidades;i++){
+            Circle miembro = new Circle(colores[1]);
+            miembro.setTablero(tablero);
+            if(cuerpo.isEmpty() ){
+                int[] local = validarSentido(sentido, posicion.getPosicion());
+                tablero.setObjeto(miembro, local[0], local[1]);
+                miembro.setPosicion(new Posicion(local));
+                miembro.setSentido(sentido);
+            }
+            else{
+                Circle cola = cuerpo.get(longitud-2);
+                int[] local = validarSentido(sentido,cola.getPosicion().getPosicion());
+                tablero.setObjeto(miembro,local[0],local[1]);
+                miembro.setSentido(sentido);
+                miembro.setPosicion(new Posicion(local[0],local[1]));
+            }
+            cuerpo.push(miembro);
+            longitud+=1;
+        }
+    }   
+```
+### SQL
+```
+/*El numero maximo de piezas que se pueden solicitar es 50*/
+CREATE OR REPLACE TRIGGER Maximos_tubos
+BEFORE INSERT ON pedido_pieza
+FOR EACH ROW
+BEGIN
+	IF :NEW.cantidad_piezas > 50 THEN
+		RAISE_APPLICATION_ERROR(-20001,'El Numero maximo de piezas que se pueden solicitar es 50');
+	END IF;
+END;
+```
+
+### Python
+```
+from sys import stdin
+def MCD(first_element,last_element):
+    if last_element == 0:
+        return first_element
+    else:
+        return MCD(last_element,first_element%last_element)
+
+def main():
+    numbers = stdin.readline().strip().split()
+    a, b = int(numbers[0]), int(numbers[1])
+    print(MCD(a,b))
+```
 
 
 
